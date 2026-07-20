@@ -1,6 +1,7 @@
 const authRoutes = require("./routes/authRoutes");
 const dns = require("dns");
 const pgRoutes = require("./routes/pgRoutes");
+const requestPGRoutes = require("./routes/requestPGRoutes");
 // Use Google DNS instead of the broken localhost DNS
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const express = require("express");
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/pg", pgRoutes);
+app.use("/api/request-pg", requestPGRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.send("🚀 StayFinder Backend Running");

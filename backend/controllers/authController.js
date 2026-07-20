@@ -66,17 +66,24 @@ const loginUser = async (req, res) => {
         message: "Invalid password",
       });
     }
+    // Only admin can login here
+  if (!user.isAdmin) {
+  return res.status(403).json({
+    success: false,
+    message: "Access denied",
+  });
+  }
 
     // Generate JWT Token
     const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      "stayfinder_secret_key",
-      {
-        expiresIn: "7d",
-      }
-    );
+  {
+    id: user._id,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+);
 
     res.status(200).json({
       success: true,

@@ -13,13 +13,16 @@ const addPG = async (req, res) => {
     } = req.body;
 
     const newPG = new PG({
-      title,
-      location,
-      price,
-      description,
-      image,
-      amenities,
-    });
+  title,
+  location,
+  price,
+  description,
+  image,
+  amenities,
+  latitude: req.body.latitude,
+  longitude: req.body.longitude,
+
+});
 
     await newPG.save();
 
@@ -143,6 +146,8 @@ const deletePG = async (req, res) => {
     });
   }
 };
+
+
 module.exports = {
   addPG,
   getAllPGs,

@@ -18,9 +18,15 @@ function Login() {
     }
 
     try {
-      await loginUser(email, password);
-      toast.success("Login Successful!");
-      navigate("/dashboard");
+      const result = await loginUser(email, password);
+
+toast.success("Login Successful!");
+
+if (result.user.email === "owner@gmail.com") {
+  navigate("/admin/dashboard");
+} else {
+  navigate("/dashboard");
+}
     } catch (error) {
       toast.error(error.message);
     }

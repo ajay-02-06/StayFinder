@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "owner"],
       default: "student",
     },
+    isAdmin: {
+  type: Boolean,
+  default: false,
+   },
   },
   { timestamps: true }
 );

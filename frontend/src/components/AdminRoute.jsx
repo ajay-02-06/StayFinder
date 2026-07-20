@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-function ProtectedRoute({ children }) {
+const ADMIN_EMAIL = "owner@gmail.com"; // Replace with your admin email
+
+function AdminRoute({ children }) {
   const [user, setUser] = useState(undefined);
 
   useEffect(() => {
@@ -22,7 +24,15 @@ function ProtectedRoute({ children }) {
     );
   }
 
-  return user ? children : <Navigate to="/" replace />;
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (user.email !== ADMIN_EMAIL) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
 }
 
-export default ProtectedRoute;
+export default AdminRoute;
