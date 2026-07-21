@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/request-pg";
+const API =  "https://stayfinder-bjfm.onrender.com/api/pg";
 
 // Submit Request
 export const submitRequest = async (data) => {
