@@ -63,6 +63,9 @@ const handleEdit = (pg) => {
 
         <Topbar
   onAdd={() => setShowAddModal(true)}
+  showAddButton={true}
+  title="Admin Dashboard"
+  subtitle="Manage StayFinder PG Listings"
 />
 
         <div className="p-8">

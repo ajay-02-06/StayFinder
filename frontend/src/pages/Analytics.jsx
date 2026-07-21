@@ -27,7 +27,10 @@ function Analytics() {
 
       <div className="flex-1">
 
-        <Topbar />
+        <Topbar
+  title="Analytics"
+  subtitle="View business insights"
+/>
 
         <div className="p-8">
 

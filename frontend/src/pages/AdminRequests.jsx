@@ -55,7 +55,10 @@ function AdminRequests() {
 
       <div className="flex-1">
 
-        <Topbar />
+        <Topbar
+  title="PG Requests"
+  subtitle="Approve or reject host requests"
+/>
 
         <div className="p-8">
 

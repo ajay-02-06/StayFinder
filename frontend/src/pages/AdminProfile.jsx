@@ -25,7 +25,10 @@ function AdminProfile() {
       <Sidebar />
 
       <div className="flex-1">
-        <Topbar />
+       <Topbar
+  title="Admin Profile"
+  subtitle="Manage your account"
+/>
 
         <div className="p-8">
           <h1 className="text-4xl font-bold mb-8">
