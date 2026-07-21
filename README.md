@@ -1,20 +1,21 @@
 # 🏠 StayFinder
 
-StayFinder is a full-stack PG (Paying Guest) accommodation platform that helps users discover, save, and request new PG listings while providing administrators with a powerful dashboard to manage properties and approve new PG requests.
+StayFinder is a full-stack PG (Paying Guest) accommodation platform that connects students and working professionals with quality PG accommodations while giving administrators complete control over property listings.
 
 ---
 
 ## ✨ Features
 
-### 👤 User
-- Secure Login & Signup
-- Browse PG Listings
-- Wishlist
-- View PG Details
-- Become a Host (Submit PG Request)
-- Responsive Dashboard
+### 👤 User Features
+- 🔐 Firebase Authentication
+- 🏠 Browse PG Listings
+- 📍 View PG Details
+- ❤️ Wishlist
+- 📝 Become a Host (Submit PG Request)
+- 🔍 Search PGs
+- 📱 Responsive Interface (In Progress)
 
-### 🛡️ Admin
+### 🛡️ Admin Features
 - Secure Admin Login
 - Dashboard Overview
 - Add PG
@@ -23,17 +24,18 @@ StayFinder is a full-stack PG (Paying Guest) accommodation platform that helps u
 - Analytics Dashboard
 - Admin Profile
 - Approve / Reject PG Requests
-- Manage Property Listings
+- Manage Listings
 
 ---
 
-## 🚀 Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 - React.js
 - React Router
 - Tailwind CSS
 - Axios
+- Chart.js
 - Firebase Authentication
 
 ### Backend
@@ -50,35 +52,37 @@ StayFinder is a full-stack PG (Paying Guest) accommodation platform that helps u
 
 ---
 
-## 📂 Project Structure
+## 📂 Folder Structure
 
 ```
 StayFinder
+│
+├── backend
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   └── server.js
 │
 ├── frontend
 │   ├── components
 │   ├── pages
 │   ├── services
-│   └── assets
-│
-├── backend
-│   ├── controllers
-│   ├── models
-│   ├── routes
-│   ├── config
-│   └── server.js
+│   ├── assets
+│   └── App.jsx
 │
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation
+## 🚀 Installation
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/StayFinder.git
+git clone https://github.com/ajay-02-06/StayFinder.git
 ```
 
 ### Backend
@@ -99,13 +103,27 @@ npm run dev
 
 ---
 
-## 📌 Future Improvements
+## 📸 Screenshots
 
-- Advanced Search & Filters
+Coming Soon
+
+- Home Page
+- User Dashboard
+- Admin Dashboard
+- Analytics
+- PG Details
+- Wishlist
+- Become a Host
+
+---
+
+## 🎯 Future Improvements
+
 - Google Maps Integration
+- Cloudinary Image Upload
 - Mobile Responsive Design
-- User Reviews & Ratings
-- Image Upload (Cloudinary)
+- Advanced Filters
+- Reviews & Ratings
 - Email Notifications
 - Payment Integration
 
@@ -120,6 +138,6 @@ https://github.com/ajay-02-06
 
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
 
-Give it a ⭐ on GitHub.
+If you like this project, consider giving it a ⭐ on GitHub.
