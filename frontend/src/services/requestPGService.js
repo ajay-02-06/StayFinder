@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API =  "https://stayfinder-bjfm.onrender.com/api/pg";
-
+const API = "https://stayfinder-bjfm.onrender.com/api/request-pg";
 // Submit Request
 export const submitRequest = async (data) => {
   const response = await axios.post(API, data);

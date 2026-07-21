@@ -15,7 +15,7 @@ function Sidebar() {
 
   const logout = async () => {
     await logoutUser();
-    navigate("/admin/login");
+   navigate("/");
   };
 
   return (
