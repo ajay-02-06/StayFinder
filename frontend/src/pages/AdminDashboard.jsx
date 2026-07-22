@@ -13,8 +13,9 @@ import {
 function AdminDashboard() {
   const [pgs, setPGs] = useState([]);
   const [selectedPG, setSelectedPG] = useState(null);
-const [showEditModal, setShowEditModal] = useState(false);
-const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+
   useEffect(() => {
     fetchPGs();
   }, []);
@@ -50,49 +51,63 @@ const [showAddModal, setShowAddModal] = useState(false);
       alert("Failed to delete PG");
     }
   };
-const handleEdit = (pg) => {
-  setSelectedPG(pg);
-  setShowEditModal(true);
-};
+
+  const handleEdit = (pg) => {
+    setSelectedPG(pg);
+    setShowEditModal(true);
+  };
+
   return (
     <div className="flex min-h-screen bg-slate-100">
 
+      {/* Sidebar */}
       <Sidebar />
 
-      <div className="flex-1">
+      {/* Main Content */}
+      <div className="flex-1 w-full overflow-hidden">
 
         <Topbar
-  onAdd={() => setShowAddModal(true)}
-  showAddButton={true}
-  title="Admin Dashboard"
-  subtitle="Manage StayFinder PG Listings"
-/>
+          onAdd={() => setShowAddModal(true)}
+          showAddButton={true}
+          title="Admin Dashboard"
+          subtitle="Manage StayFinder PG Listings"
+        />
 
-        <div className="p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
 
-          <StatsCards pgs={pgs} />
+          {/* Stats */}
+          <div className="mb-8">
+            <StatsCards pgs={pgs} />
+          </div>
 
-          <div className="mt-8">
+          {/* Table */}
+          <div className="bg-white rounded-2xl shadow overflow-x-auto">
 
             <PGTable
-  pgs={pgs}
-  onDelete={handleDelete}
-  onEdit={handleEdit}
-/>
+              pgs={pgs}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+
           </div>
 
         </div>
+
+        {/* Edit Modal */}
         <EditPGModal
-  show={showEditModal}
-  pg={selectedPG}
-  onClose={() => setShowEditModal(false)}
-  onUpdate={fetchPGs}
-/>
-<AddPGModal
-  show={showAddModal}
-  onClose={() => setShowAddModal(false)}
-  onAdd={fetchPGs}
-/>
+          show={showEditModal}
+          pg={selectedPG}
+          onClose={() => setShowEditModal(false)}
+          onUpdate={fetchPGs}
+        />
+
+        {/* Add Modal */}
+        <AddPGModal
+          show={showAddModal}
+          onClose={() => setShowAddModal(false)}
+          onAdd={fetchPGs}
+        />
+
       </div>
 
     </div>

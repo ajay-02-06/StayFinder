@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import AvailabilityChart from "../components/analytics/AvailabilityChart";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
+
 import SummaryCards from "../components/analytics/SummaryCards";
+import InsightCards from "../components/analytics/InsightCards";
+import AvailabilityChart from "../components/analytics/AvailabilityChart";
 import TypeChart from "../components/analytics/TypeChart";
-import { getAllPGs } from "../services/pgService";
 import PriceChart from "../components/analytics/PriceChart";
 import RatingChart from "../components/analytics/RatingChart";
-import InsightCards from "../components/analytics/InsightCards";
+
+import { getAllPGs } from "../services/pgService";
+
 function Analytics() {
   const [pgs, setPGs] = useState([]);
 
@@ -16,8 +19,12 @@ function Analytics() {
   }, []);
 
   const fetchPGs = async () => {
-    const data = await getAllPGs();
-    setPGs(data.pgs);
+    try {
+      const data = await getAllPGs();
+      setPGs(data.pgs || []);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -25,35 +32,41 @@ function Analytics() {
 
       <Sidebar />
 
-      <div className="flex-1">
+      <div className="flex-1 overflow-x-hidden">
 
         <Topbar
-  title="Analytics"
-  subtitle="View business insights"
-/>
+          title="Analytics"
+          subtitle="View business insights"
+        />
 
-        <div className="p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
 
-          <h1 className="text-4xl font-bold mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
             📊 Analytics
           </h1>
 
           <SummaryCards pgs={pgs} />
-          <InsightCards pgs={pgs} />
-<div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-10">
 
-  <AvailabilityChart pgs={pgs} />
+          <div className="mt-6">
+            <InsightCards pgs={pgs} />
+          </div>
 
-  <TypeChart pgs={pgs} />
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 mt-8">
 
-</div>
-<div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-8">
+            <AvailabilityChart pgs={pgs} />
 
-    <PriceChart pgs={pgs} />
+            <TypeChart pgs={pgs} />
 
-    <RatingChart pgs={pgs} />
+          </div>
 
-</div>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 mt-8">
+
+            <PriceChart pgs={pgs} />
+
+            <RatingChart pgs={pgs} />
+
+          </div>
+
         </div>
 
       </div>

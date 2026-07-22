@@ -26,41 +26,73 @@ function BecomeHost() {
   };
 
   const handleSubmit = async () => {
-    try {
-      await submitRequest({
-        ...form,
-        price: Number(form.price),
-        rating: Number(form.rating),
-        latitude: Number(form.latitude),
-        longitude: Number(form.longitude),
-        amenities: form.amenities
-          .split(",")
-          .map((item) => item.trim()),
-      });
+  // Empty field validation
+  if (
+    !form.title ||
+    !form.location ||
+    !form.ownerName ||
+    !form.ownerPhone ||
+    !form.latitude ||
+    !form.longitude ||
+    !form.price ||
+    !form.rating ||
+    !form.image ||
+    !form.description ||
+    !form.amenities
+  ) {
+    alert("Please fill all fields.");
+    return;
+  }
 
-      alert("Request Submitted Successfully!");
+  // Phone validation
+  if (!/^[0-9]{10}$/.test(form.ownerPhone)) {
+    alert("Enter a valid 10-digit phone number.");
+    return;
+  }
 
-      setForm({
-        title: "",
-        location: "",
-        ownerName: "",
-        ownerPhone: "",
-        latitude: "",
-        longitude: "",
-        price: "",
-        rating: "",
-        image: "",
-        description: "",
-        type: "Boys",
-        availability: "Available",
-        amenities: "",
-      });
+  try {
+    await submitRequest({
+      ...form,
+      price: Number(form.price),
+      rating: Number(form.rating),
+      latitude: Number(form.latitude),
+      longitude: Number(form.longitude),
+      amenities: form.amenities
+        .split(",")
+        .map((item) => item.trim()),
+    });
 
-    } catch (error) {
-      console.log(error);
-      alert("Failed to Submit Request");
+    alert("PG Request Submitted Successfully!");
+
+    setForm({
+      title: "",
+      location: "",
+      ownerName: "",
+      ownerPhone: "",
+      latitude: "",
+      longitude: "",
+      price: "",
+      rating: "",
+      image: "",
+      description: "",
+      type: "Boys",
+      availability: "Available",
+      amenities: "",
+    });
+  } catch (error) {
+    console.log(error);
+
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.message
+    ) {
+      alert(error.response.data.message);
+    } else {
+      alert("Failed to submit request.");
     }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center py-10">

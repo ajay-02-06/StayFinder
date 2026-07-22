@@ -8,6 +8,38 @@ const PG = require("../models/PG");
 
 const submitRequest = async (req, res) => {
   try {
+    const {
+      title,
+      location,
+      ownerPhone,
+    } = req.body;
+
+    // Check if same request already exists
+    const existingRequest = await RequestPG.findOne({
+      title: title.trim(),
+      location: location.trim(),
+      ownerPhone: ownerPhone.trim(),
+    });
+
+    if (existingRequest) {
+      return res.status(400).json({
+        success: false,
+        message: "You have already submitted this PG request.",
+      });
+    }
+
+    // Check if PG already exists in approved PG list
+    const existingPG = await PG.findOne({
+      title: title.trim(),
+      location: location.trim(),
+    });
+
+    if (existingPG) {
+      return res.status(400).json({
+        success: false,
+        message: "This PG already exists.",
+      });
+    }
 
     const request = await RequestPG.create(req.body);
 
@@ -18,14 +50,12 @@ const submitRequest = async (req, res) => {
     });
 
   } catch (error) {
-
     console.log(error);
 
     res.status(500).json({
       success: false,
       message: "Server Error",
     });
-
   }
 };
 

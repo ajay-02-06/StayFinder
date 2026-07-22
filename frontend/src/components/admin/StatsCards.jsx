@@ -5,7 +5,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 
-function StatsCards({ pgs }) {
+function StatsCards({ pgs = [] }) {
   console.log("StatsCards:", pgs);
 
   const total = pgs.length;
@@ -19,10 +19,10 @@ function StatsCards({ pgs }) {
   const avgRating =
     total > 0
       ? (
-          pgs.reduce((sum, pg) => sum + pg.rating, 0) /
+          pgs.reduce((sum, pg) => sum + (pg.rating || 0), 0) /
           total
         ).toFixed(1)
-      : 0;
+      : "0.0";
 
   const cards = [
     {
@@ -52,27 +52,33 @@ function StatsCards({ pgs }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+
       {cards.map((card) => (
         <div
           key={card.title}
-          className="bg-white rounded-2xl shadow-lg p-6 flex justify-between items-center hover:shadow-xl transition"
+          className="bg-white rounded-2xl shadow-lg p-5 flex items-center justify-between hover:shadow-xl transition-all duration-300"
         >
-          <div>
-            <p className="text-gray-500">{card.title}</p>
 
-            <h2 className="text-4xl font-bold mt-3">
+          <div className="min-w-0">
+            <p className="text-gray-500 text-sm sm:text-base">
+              {card.title}
+            </p>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-2 break-words">
               {card.value}
             </h2>
           </div>
 
           <div
-            className={`${card.color} text-white text-3xl p-5 rounded-2xl`}
+            className={`${card.color} text-white text-xl sm:text-2xl lg:text-3xl p-4 sm:p-5 rounded-2xl flex-shrink-0`}
           >
             {card.icon}
           </div>
+
         </div>
       ))}
+
     </div>
   );
 }

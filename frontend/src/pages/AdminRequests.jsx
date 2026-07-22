@@ -14,7 +14,7 @@ function AdminRequests() {
   const loadRequests = async () => {
     try {
       const data = await getAllRequests();
-      setRequests(data.requests);
+      setRequests(data.requests || []);
     } catch (error) {
       console.log(error);
     }
@@ -56,93 +56,110 @@ function AdminRequests() {
       <div className="flex-1">
 
         <Topbar
-  title="PG Requests"
-  subtitle="Approve or reject host requests"
-/>
+          title="PG Requests"
+          subtitle="Approve or reject host requests"
+        />
 
-        <div className="p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
 
-          <h1 className="text-4xl font-bold mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
             PG Requests
           </h1>
 
-          <div className="bg-white rounded-2xl shadow overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
 
-            <table className="w-full">
+            <div className="overflow-x-auto">
 
-              <thead className="bg-blue-600 text-white">
+              <table className="min-w-[850px] w-full">
 
-                <tr>
-                  <th className="p-4">PG</th>
-                  <th>Owner</th>
-                  <th>Phone</th>
-                  <th>Price</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
+                <thead className="bg-blue-600 text-white">
 
-              </thead>
-
-              <tbody>
-
-                {requests.map((pg) => (
-
-                  <tr
-                    key={pg._id}
-                    className="border-b text-center"
-                  >
-
-                    <td className="p-4">
-                      {pg.title}
-                    </td>
-
-                    <td>
-                      {pg.ownerName}
-                    </td>
-
-                    <td>
-                      {pg.ownerPhone}
-                    </td>
-
-                    <td>
-                      ₹{pg.price}
-                    </td>
-
-                    <td>
-
-                      <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
-
-                        {pg.status}
-
-                      </span>
-
-                    </td>
-
-                    <td className="space-x-2">
-
-                      <button
-                        onClick={() => handleApprove(pg._id)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
-                      >
-                        Approve
-                      </button>
-
-                      <button
-                        onClick={() => handleReject(pg._id)}
-                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
-                      >
-                        Reject
-                      </button>
-
-                    </td>
-
+                  <tr>
+                    <th className="p-4">PG</th>
+                    <th className="p-4">Owner</th>
+                    <th className="p-4">Phone</th>
+                    <th className="p-4">Price</th>
+                    <th className="p-4">Status</th>
+                    <th className="p-4">Action</th>
                   </tr>
 
-                ))}
+                </thead>
 
-              </tbody>
+                <tbody>
 
-            </table>
+                  {requests.length > 0 ? (
+                    requests.map((pg) => (
+
+                      <tr
+                        key={pg._id}
+                        className="border-b hover:bg-slate-50 text-center"
+                      >
+
+                        <td className="p-4 whitespace-nowrap font-semibold">
+                          {pg.title}
+                        </td>
+
+                        <td className="p-4 whitespace-nowrap">
+                          {pg.ownerName}
+                        </td>
+
+                        <td className="p-4 whitespace-nowrap">
+                          {pg.ownerPhone}
+                        </td>
+
+                        <td className="p-4 whitespace-nowrap">
+                          ₹{pg.price}
+                        </td>
+
+                        <td className="p-4">
+
+                          <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">
+                            {pg.status}
+                          </span>
+
+                        </td>
+
+                        <td className="p-4">
+
+                          <div className="flex justify-center gap-2">
+
+                            <button
+                              onClick={() => handleApprove(pg._id)}
+                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                            >
+                              Approve
+                            </button>
+
+                            <button
+                              onClick={() => handleReject(pg._id)}
+                              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+                            >
+                              Reject
+                            </button>
+
+                          </div>
+
+                        </td>
+
+                      </tr>
+
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="6"
+                        className="text-center py-8 text-gray-500"
+                      >
+                        No Pending Requests
+                      </td>
+                    </tr>
+                  )}
+
+                </tbody>
+
+              </table>
+
+            </div>
 
           </div>
 

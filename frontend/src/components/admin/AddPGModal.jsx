@@ -70,14 +70,15 @@ function AddPGModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
-      <div className="bg-white rounded-2xl w-[700px] p-8">
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
 
-        <h2 className="text-3xl font-bold mb-6">
+      <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-8">
+
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6">
           Add New PG
         </h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           <input
             name="title"
@@ -97,7 +98,7 @@ function AddPGModal({
 
           <input
             name="latitude"
-            placeholder="Latitude (17.3850)"
+            placeholder="Latitude"
             value={form.latitude}
             onChange={handleChange}
             className="border p-3 rounded-lg"
@@ -105,7 +106,7 @@ function AddPGModal({
 
           <input
             name="longitude"
-            placeholder="Longitude (78.4867)"
+            placeholder="Longitude"
             value={form.longitude}
             onChange={handleChange}
             className="border p-3 rounded-lg"
@@ -132,7 +133,7 @@ function AddPGModal({
             placeholder="Image URL"
             value={form.image}
             onChange={handleChange}
-            className="border p-3 rounded-lg col-span-2"
+            className="border p-3 rounded-lg md:col-span-2"
           />
 
           <textarea
@@ -140,7 +141,7 @@ function AddPGModal({
             placeholder="Description"
             value={form.description}
             onChange={handleChange}
-            className="border p-3 rounded-lg col-span-2 h-32"
+            className="border p-3 rounded-lg md:col-span-2 h-32"
           />
 
           <select
@@ -169,23 +170,23 @@ function AddPGModal({
             placeholder="WiFi, AC, Food"
             value={form.amenities}
             onChange={handleChange}
-            className="border p-3 rounded-lg col-span-2"
+            className="border p-3 rounded-lg md:col-span-2"
           />
 
         </div>
 
-        <div className="flex justify-end gap-4 mt-8">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
 
           <button
             onClick={onClose}
-            className="bg-gray-400 text-white px-6 py-2 rounded-lg"
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition"
           >
             Cancel
           </button>
 
           <button
             onClick={handleAdd}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
           >
             Add PG
           </button>
@@ -193,6 +194,7 @@ function AddPGModal({
         </div>
 
       </div>
+
     </div>
   );
 }
